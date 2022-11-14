@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TaskBD App',
+      title: 'agenda App',
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );

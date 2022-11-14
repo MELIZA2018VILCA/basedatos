@@ -21,14 +21,14 @@ class DBAdmin {
 
   Future<Database> initDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = join(directory.path, "TaskDB.db");
+    String path = join(directory.path, "agenda.db");
     return await openDatabase(
       path,
       version: 1,
       onOpen: (db) {},
       onCreate: (Database dbx, int version) async {
         await dbx.execute(
-            "CREATE TABLE task(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, status TEXT)");
+            "CREATE TABLE task(id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, dni TEXT, telefono TEXT, direccion TEXT)");
       },
     );
   }
