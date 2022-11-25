@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:basedatos/models/task_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -57,13 +58,22 @@ class DBAdmin {
   getRawTasks() async {
     Database? db = await chekDatabase();
     List tasks = await db!.rawQuery("SELECT * FROM Task");
-    print(tasks);
+    print(tasks[0]);
   }
 
-  getTasks() async {
+   Future<List<taskModel>> getTasks() async {
     Database? db = await chekDatabase();
-    List tasks = await db!.query("Task");
-    print(tasks);
+    List<Map<String, dynamic>> tasks = await db!.query("Task");
+    List<taskModel> taskModelList = tasks.map((e) => taskModel.deMapAModel(e)).toList();
+
+    /* tasks.forEach((element) {
+      taskModel task = taskModel.deMapAModel(element)
+     taskModelList.add(task);
+    }); */
+    print(taskModelList);
+
+    return taskModelList;
+  
   }
 
   updateRawTasks() async {
